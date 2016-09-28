@@ -1,0 +1,65 @@
+#!/bin/sh
+
+set -e
+
+# If you want to build using APT caching proxy. Set Address here.
+# eg: APT_CACHER="192.168.43.10:3142/"
+_APT_CACHER=""
+
+# Set architecture, "amd64" or "i386". Default use host system architecture.
+_LINUX_ARCH="$(dpkg --print-architecture)"
+
+# Set Linux flavours.
+# Default use "amd64" on "amd64" architecture, and "586 686-pae" on "i386" architecture.
+case "${_LINUX_ARCH}" in
+	amd64)
+		_LINUX_FLAVOURS="amd64"
+		_SOURCE="false"
+		;;
+
+	i386)
+		_LINUX_FLAVOURS="586 686-pae"
+		_SOURCE="false"
+		;;
+esac
+# _LINUX_FLAVOURS="amd64"
+
+lb config noauto \
+	--apt-indices true \
+	--apt-source-archives false \
+	--architectures "${_LINUX_ARCH}" \
+	--archive-areas "main contrib non-free" \
+	--binary-images iso-hybrid \
+	--bootappend-live "boot=live components quiet splash" \
+	--bootloader syslinux \
+	--cache-packages true \
+	--debian-installer-distribution jessie \
+	--debian-installer-gui true \
+	--debian-installer live \
+	--distribution jessie \
+	--iso-application "Waha GNU/Linux" \
+	--iso-publisher "Waha Project Team; http://wahaproject.org/" \
+	--iso-volume "Waha GNU/Linux" \
+	--keyring-packages "pkg-mozilla-archive-keyring waha-archive-keyring deb-multimedia-keyring" \
+	--linux-flavours "${_LINUX_FLAVOURS}" \
+	--linux-packages "linux-image linux-headers" \
+	--memtest memtest86+ \
+	--mirror-binary "http://http.debian.net/debian" \
+	--mirror-bootstrap "http://${_APT_CACHER}http.debian.net/debian" \
+	--mirror-chroot "http://${_APT_CACHER}http.debian.net/debian" \
+	--mirror-debian-installer "http://${_APT_CACHER}http.debian.net/debian" \
+	--mode debian \
+	--parent-distribution jessie \
+	--parent-archive-areas "main contrib non-free" \
+	--parent-mirror-binary "http://http.debian.net/debian" \
+	--parent-mirror-binary-security "http://security.debian.org/" \
+	--parent-mirror-bootstrap "http://${_APT_CACHER}http.debian.net/debian" \
+	--parent-mirror-chroot "http://${_APT_CACHER}http.debian.net/debian" \
+	--parent-mirror-chroot-security "http://${_APT_CACHER}security.debian.org/" \
+	--parent-mirror-debian-installer "http://${_APT_CACHER}http.debian.net/debian" \
+	--security true \
+	--source "${_SOURCE}" \
+	--updates true \
+	--loadlin false \
+	--win32-loader false \
+"${@}"

@@ -1,0 +1,10 @@
+# live-config xserver-xorg script
+pciutils
+
+# broadcom-sta
+broadcom-sta-dkms
+
+# virtualbox
+virtualbox-guest-dkms
+virtualbox-guest-utils
+virtualbox-guest-x11
