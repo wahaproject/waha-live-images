@@ -12,8 +12,8 @@ apt-get update
 apt-get -y -t jessie install live-build live-config live-config-systemd live-boot isolinux syslinux-common
 
 # Patch live build binary_syslinux to support multi cfg.in files
-EXEC_PATCH() { local _PATCH_RES=$(patch --backup-if-mismatch --forward /usr/lib/live/build/binary_syslinux ./binary_syslinux_patch); }
-EXEC_PATCH
+EXEC_PATCH() { patch --backup-if-mismatch --forward /usr/lib/live/build/binary_syslinux ./binary_syslinux_patch; }
+EXEC_PATCH || true
 
 _FLAVOURS="gnome"
 _NAME="wahalinux-8.6"
