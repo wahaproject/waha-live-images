@@ -2,21 +2,16 @@
 
 set -e
 
-if [ $(lsb_release -cs) = "wheezy" ]; then
-	echo "deb http://http.debian.net/debian jessie main contrib non-free"> /etc/apt/sources.list.d/jessie.list
-	echo jessie source added.
-fi
-
 # Install requirements
 apt-get update
-apt-get -y -t jessie install live-build live-config live-config-systemd live-boot isolinux syslinux-common
+apt-get install live-build live-config live-config-systemd live-boot isolinux syslinux-common
 
 # Patch live build binary_syslinux to support multi cfg.in files
 EXEC_PATCH() { patch --backup-if-mismatch --forward /usr/lib/live/build/binary_syslinux ./binary_syslinux_patch; }
 EXEC_PATCH || true
 
 _FLAVOURS="gnome"
-_NAME="wahalinux-8.6"
+_NAME="wahalinux-8.8"
 _SETS="unofficial"
 _SUFFIX=""
 _ARCHITECTURE="$(dpkg --print-architecture)"

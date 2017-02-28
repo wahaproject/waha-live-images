@@ -1,0 +1,35 @@
+#!/bin/sh
+
+set -e
+
+# List of packages to remove
+PKGSTORM='reportbug fonts-lohit-beng-assamese fonts-lohit-beng-bengali fonts-lohit-deva fonts-lohit-gujr fonts-lohit-guru fonts-lohit-knda fonts-lohit-orya fonts-lohit-taml fonts-lohit-telu fonts-gujr-extra fonts-gubbi fonts-beng-extra fonts-deva-extra fonts-samyak-taml fonts-samyak-gujr fonts-orya-extra fonts-guru-extra fonts-navilu fonts-gargi fonts-kalapi fonts-lohit-taml-classical fonts-nakula fonts-sahadeva fonts-samyak-deva fonts-sarai fonts-telu-extra'
+
+# Remove unused packages
+for PACKAGE in ${PKGSTORM}
+do
+	if ! apt-get remove --purge --yes "${PACKAGE}"
+	then
+		echo "WARNING: ${PACKAGE} isn't installed"
+	fi
+done
+
+# Remove desktop files of unwanted games, I dont remove the thier packages because it is part of gnome-meta package.
+if [ -f /usr/share/applications/tali.desktop ]; then
+	rm /usr/share/applications/tali.desktop
+fi
+
+if [ -f /usr/share/applications/sol.desktop ]; then
+	rm /usr/share/applications/sol.desktop
+fi
+
+# Remove live-build empty directory.
+if [ -d /live-build ]; then
+	rmdir --ignore-fail-on-non-empty /live-build
+fi
+
+# Search and remove the old kernel files
+rm -f /*.old
+
+# Set the colored 'most' as the default pager
+update-alternatives --set pager /usr/bin/most

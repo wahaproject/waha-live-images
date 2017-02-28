@@ -1,0 +1,45 @@
+
+   The Plop Boot Manager licence conditions:
+
+   This licence conditions are also used for the boot manager tools that
+   are written by Elmar Hanlhofer and not released under the GPL.
+     * The programs are free to use for personal and commercial use.
+     * The programs may not be sold^1.
+     * The origin of this software must not be misrepresented; you must
+       not claim that you wrote the original software. If you use this
+       software in a product, an acknowledgment in the product
+       documentation would be appreciated but is not required.
+     * This software is provided 'as-is', without any express or implied
+       warranty. In no event will the authors be held liable for any
+       damages arising from the use of this software.
+
+   ^1 You can add the tools to non-profit products for free.
+   Example: You sell a CD and charge only the price for the blank CD
+   without the work to create the final CD (and so on).
+
+----------------------------------------------------------------------
+
+   Die Plop Bootmanager Lizenzbedingungen:
+
+   Die Lizenzbedingungen gelten auch fuer die Bootmanagertools die von
+   Elmar Hanlhofer programmiert wurden und nicht der GPL unterliegen.
+
+     * Die Programme duerfen kostenlos fuer private und kommerzielle
+       Zwecke genutzt werden.
+     * Die Programme duerfen nicht verkauft werden^1.
+     * Die Herkunft dieser Software darf nicht falsch dargestellt werden;
+       Sie duerfen nicht angeben, dass Sie die urspruengliche Software
+       geschrieben haben. Wenn Sie diese Software in einem Produkt
+       benutzten, wuerde eine Erwaehnung geschaetzt werden, sie ist aber
+       nicht erforderlich.
+     * Diese Software wird ohne ausdrueckliche oder implizierte Garantie
+       bereitgestellt. In keinem Fall koennen die Autoren fuer
+       irgendwelche Schaeden, die durch die Benutzung dieser Software
+       entstanden sind, haftbar gemacht werden.
+
+   ^1 Die Programme koennen zu "auf nicht Gewinn ausgerichtete" Produkte
+   hinzugefuegt werden.
+   Beispiel: Sie verkaufen eine CD und verlangen nur den Preis des CD
+   Rohlings, alles andere wie z.B. Arbeitszeit zum erstellen der CD wird
+   nicht verrechnet.
+
