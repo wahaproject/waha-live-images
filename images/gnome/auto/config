@@ -22,7 +22,6 @@ case "${_LINUX_ARCH}" in
 		_SOURCE="false"
 		;;
 esac
-# _LINUX_FLAVOURS="amd64"
 
 lb config noauto \
 	--apt-indices true \
@@ -31,7 +30,6 @@ lb config noauto \
 	--archive-areas "main contrib non-free" \
 	--binary-images iso-hybrid \
 	--bootappend-live "boot=live components quiet splash" \
-	--bootloader syslinux \
 	--cache-packages true \
 	--debian-installer-distribution jessie \
 	--debian-installer-gui true \
@@ -44,19 +42,19 @@ lb config noauto \
 	--linux-flavours "${_LINUX_FLAVOURS}" \
 	--linux-packages "linux-image linux-headers" \
 	--memtest memtest86+ \
-	--mirror-binary "http://http.debian.net/debian" \
-	--mirror-bootstrap "http://${_APT_CACHER}http.debian.net/debian" \
-	--mirror-chroot "http://${_APT_CACHER}http.debian.net/debian" \
-	--mirror-debian-installer "http://${_APT_CACHER}http.debian.net/debian" \
+	--mirror-binary "http://deb.debian.org/debian" \
+	--mirror-bootstrap "http://${_APT_CACHER}deb.debian.org/debian" \
+	--mirror-chroot "http://${_APT_CACHER}deb.debian.org/debian" \
+	--mirror-debian-installer "http://${_APT_CACHER}deb.debian.org/debian" \
 	--mode debian \
 	--parent-distribution jessie \
 	--parent-archive-areas "main contrib non-free" \
-	--parent-mirror-binary "http://http.debian.net/debian" \
+	--parent-mirror-binary "http://deb.debian.org/debian" \
 	--parent-mirror-binary-security "http://security.debian.org/" \
-	--parent-mirror-bootstrap "http://${_APT_CACHER}http.debian.net/debian" \
-	--parent-mirror-chroot "http://${_APT_CACHER}http.debian.net/debian" \
+	--parent-mirror-bootstrap "http://${_APT_CACHER}deb.debian.org/debian" \
+	--parent-mirror-chroot "http://${_APT_CACHER}deb.debian.org/debian" \
 	--parent-mirror-chroot-security "http://${_APT_CACHER}security.debian.org/" \
-	--parent-mirror-debian-installer "http://${_APT_CACHER}http.debian.net/debian" \
+	--parent-mirror-debian-installer "http://${_APT_CACHER}deb.debian.org/debian" \
 	--security true \
 	--source "${_SOURCE}" \
 	--updates true \
