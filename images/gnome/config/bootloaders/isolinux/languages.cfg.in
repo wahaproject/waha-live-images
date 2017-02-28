@@ -1,11 +1,11 @@
 label live-@FLAVOUR@-arabic
-	menu label ^Live (@FLAVOUR@) Arabic
+	menu label Live (@FLAVOUR@) ^Arabic
 	linux @LINUX@
 	initrd @INITRD@
 	append @APPEND_LIVE@ locales=ar_AE.UTF-8,ar_BH.UTF-8,ar_DZ.UTF-8,ar_EG.UTF-8,ar_IN,ar_IQ.UTF-8,ar_JO.UTF-8,ar_KW.UTF-8,ar_LB.UTF-8,ar_LY.UTF-8,ar_MA.UTF-8,ar_OM.UTF-8,ar_QA.UTF-8,ar_SA.UTF-8,ar_SD.UTF-8,ar_SS,ar_SY.UTF-8,ar_TN.UTF-8,ar_YE.UTF-8,en_US.UTF-8,fr_FR.UTF-8
 
 label live-@FLAVOUR@-french
-	menu label ^Live (@FLAVOUR@) French
+	menu label Live (@FLAVOUR@) ^French
 	linux @LINUX@
 	initrd @INITRD@
-	append @APPEND_LIVE@ locales=fr_FR.UTF-8
+	append @APPEND_LIVE@ locales=fr_FR.UTF-8,ar_DZ.UTF-8,en_US.UTF-8
