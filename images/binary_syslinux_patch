@@ -1,28 +1,28 @@
-180c180,183
+237c237,240
 < if [ -e "${_TARGET}/live.cfg.in" ]
 ---
 > # Get number of cfg.in tamplate files
 > _CFG_FILES_NUM=$(find ${_TARGET} -maxdepth 1 -name '*.cfg.in' | wc -l)
 > 
 > if [ "${_CFG_FILES_NUM}" -gt 0 ]
-181a185,187
+238a242,244
 > 	# Get list of cfg.in tamplate files
 > 	_CFG_FILES=$(basename -a $(ls ${_TARGET}/*.cfg.in))
 > 
-187,190c193,196
+244,247c250,253
 < 			# If multiple initrd images are being generated (by DKMS packages, etc),
 < 			# we likely only want the latest version.
-< 			ln $(ls -r1 --sort=version binary/${_INITRAMFS}/vmlinuz-* | head -n 1) binary/${_INITRAMFS}/vmlinuz
-< 			ln $(ls -r1 --sort=version binary/${_INITRAMFS}/initrd.img-* | head -n 1) binary/${_INITRAMFS}/initrd.img
+< 			mv $(ls -r1 --sort=version binary/${_INITRAMFS}/vmlinuz-* | head -n 1) binary/${_INITRAMFS}/vmlinuz
+< 			mv $(ls -r1 --sort=version binary/${_INITRAMFS}/initrd.img-* | head -n 1) binary/${_INITRAMFS}/initrd.img
 ---
 > 		# If multiple initrd images are being generated (by DKMS packages, etc),
 > 		# we likely only want the latest version.
 > 		mv $(ls -r1 --sort=version binary/${_INITRAMFS}/vmlinuz-* | head -n 1) binary/${_INITRAMFS}/vmlinuz
 > 		mv $(ls -r1 --sort=version binary/${_INITRAMFS}/initrd.img-* | head -n 1) binary/${_INITRAMFS}/initrd.img
-191a198,199
+248a255,256
 > 		for _CFG_FILE in ${_CFG_FILES}
 > 		do
-193,198c201,207
+250,255c258,264
 < 			    -e "s|@LINUX@|/${_INITRAMFS}/vmlinuz|g" \
 < 			    -e "s|@INITRD@|/${_INITRAMFS}/initrd.img|g" \
 < 			"${_TARGET}/live.cfg.in" >> "${_TARGET}/live.cfg"
@@ -37,11 +37,11 @@
 > 			rm -f "${_TARGET}/${_CFG_FILE}"
 > 		done
 > 		;;
-201c210
+258c267
 < 			_NUMBER="0"
 ---
 > 		_NUMBER="0"
-203,205c212,214
+260,262c269,271
 < 			for _FLAVOUR in ${LB_LINUX_FLAVOURS}
 < 			do
 < 				_NUMBER="$((${_NUMBER} + 1))"
@@ -49,26 +49,26 @@
 > 		for _FLAVOUR in ${LB_LINUX_FLAVOURS}
 > 		do
 > 			_NUMBER="$((${_NUMBER} + 1))"
-207,208c216,217
-< 				ln binary/${_INITRAMFS}/vmlinuz-*-${_FLAVOUR} binary/${_INITRAMFS}/vmlinuz${_NUMBER}
-< 				ln binary/${_INITRAMFS}/initrd.img-*-${_FLAVOUR} binary/${_INITRAMFS}/initrd${_NUMBER}.img
+264,265c273,274
+< 				mv binary/${_INITRAMFS}/vmlinuz-*-${_FLAVOUR} binary/${_INITRAMFS}/vmlinuz${_NUMBER}
+< 				mv binary/${_INITRAMFS}/initrd.img-*-${_FLAVOUR} binary/${_INITRAMFS}/initrd${_NUMBER}.img
 ---
-> 			ln binary/${_INITRAMFS}/vmlinuz-*-${_FLAVOUR} binary/${_INITRAMFS}/vmlinuz${_NUMBER}
-> 			ln binary/${_INITRAMFS}/initrd.img-*-${_FLAVOUR} binary/${_INITRAMFS}/initrd${_NUMBER}.img
-209a219,220
+> 			mv binary/${_INITRAMFS}/vmlinuz-*-${_FLAVOUR} binary/${_INITRAMFS}/vmlinuz${_NUMBER}
+> 			mv binary/${_INITRAMFS}/initrd.img-*-${_FLAVOUR} binary/${_INITRAMFS}/initrd${_NUMBER}.img
+266a276,277
 > 			for _CFG_FILE in ${_CFG_FILES}
 > 			do
-212,213c223,224
+269,270c280,281
 < 					echo "" >> "${_TARGET}/live.cfg"
 < 					grep -v 'menu default' "${_TARGET}/live.cfg.in" >> "${_TARGET}/live.cfg"
 ---
 > 					echo "" >> "${_TARGET}/$(basename ${_CFG_FILE} .in)"
 > 					grep -v 'menu default' "${_TARGET}/${_CFG_FILE}" >> "${_TARGET}/$(basename ${_CFG_FILE} .in)"
-215c226
+272c283
 < 					cat "${_TARGET}/live.cfg.in" >> "${_TARGET}/live.cfg"
 ---
 > 					cat "${_TARGET}/${_CFG_FILE}" >> "${_TARGET}/$(basename ${_CFG_FILE} .in)"
-219,221c230,232
+276,278c287,289
 < 				       -e "s|@LINUX@|/${_INITRAMFS}/vmlinuz${_NUMBER}|g" \
 < 				       -e "s|@INITRD@|/${_INITRAMFS}/initrd${_NUMBER}.img|g" \
 < 				"${_TARGET}/live.cfg"
@@ -76,9 +76,9 @@
 > 				-e "s|@LINUX@|/${_INITRAMFS}/vmlinuz${_NUMBER}|g" \
 > 				-e "s|@INITRD@|/${_INITRAMFS}/initrd${_NUMBER}.img|g" \
 > 				"${_TARGET}/$(basename ${_CFG_FILE} .in)"
-222a234
+279a291
 > 		done
-224,225c236,237
+281,282c293,294
 < 			rm -f "${_TARGET}/live.cfg.in"
 < 			;;
 ---
