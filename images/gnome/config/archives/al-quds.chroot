@@ -1,0 +1,2 @@
+deb http://packages.wahaproject.org/ al-quds main contrib non-free
+# deb-src http://packages.wahaproject.org/ al-quds main contrib non-free

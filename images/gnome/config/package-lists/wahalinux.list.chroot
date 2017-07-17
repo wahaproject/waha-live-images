@@ -18,7 +18,7 @@ filezilla
 firefox-esr
 font-hosny-amiri
 font-manager
-fonts-droid
+fonts-noto-hinted
 fonts-ubuntu-title
 gbrainy
 gdebi
@@ -30,7 +30,6 @@ gnome-search-tool
 gnome-shell-extension-dashtodock
 gparted
 gstreamer1.0-plugins-ugly
-gstreamer0.10-plugins-ugly
 gthumb
 gufw
 hardinfo

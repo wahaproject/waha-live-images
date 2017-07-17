@@ -32,10 +32,10 @@ lb config noauto \
 	--bootappend-live "boot=live components quiet splash" \
 	--bootloader syslinux \
 	--cache-packages true \
-	--debian-installer-distribution jessie \
+	--debian-installer-distribution stretch \
 	--debian-installer-gui true \
 	--debian-installer live \
-	--distribution jessie \
+	--distribution stretch \
 	--iso-application "Waha GNU/Linux" \
 	--iso-publisher "Waha Project Team; http://wahaproject.org/" \
 	--iso-volume "Waha GNU/Linux" \
@@ -48,7 +48,7 @@ lb config noauto \
 	--mirror-chroot "http://${_APT_CACHER}deb.debian.org/debian" \
 	--mirror-debian-installer "http://${_APT_CACHER}deb.debian.org/debian" \
 	--mode debian \
-	--parent-distribution jessie \
+	--parent-distribution stretch \
 	--parent-archive-areas "main contrib non-free" \
 	--parent-mirror-binary "http://deb.debian.org/debian" \
 	--parent-mirror-binary-security "http://security.debian.org/" \

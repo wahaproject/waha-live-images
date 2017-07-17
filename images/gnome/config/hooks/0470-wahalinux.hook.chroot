@@ -14,7 +14,7 @@ do
 	fi
 done
 
-# Remove desktop files of unwanted games, I dont remove the thier packages because it is part of gnome-meta package.
+# Remove desktop files of unwanted games, I don't remove the thier packages because it is part of gnome-meta package.
 if [ -f /usr/share/applications/tali.desktop ]; then
 	rm /usr/share/applications/tali.desktop
 fi
