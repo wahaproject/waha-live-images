@@ -1,6 +1,8 @@
 # WahaLinux default packages
 
 # main
+android-tools-adb
+android-tools-fastboot
 asmaa
 apt-xapian-index
 audacity
@@ -25,7 +27,7 @@ gimagereader
 gksu
 gnome-exe-thumbnailer
 gnome-search-tool
-gnome-shell-extension-dash-to-dock
+gnome-shell-extension-dashtodock
 gparted
 gstreamer1.0-plugins-ugly
 gstreamer0.10-plugins-ugly
