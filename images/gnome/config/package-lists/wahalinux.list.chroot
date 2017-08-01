@@ -11,6 +11,7 @@ bicon
 bleachbit
 blender
 curlew
+dconf-editor
 ddm
 deja-dup
 elementary-icon-theme
@@ -38,7 +39,9 @@ hunspell-fr
 inxi
 jstest-gtk
 keyboard-config-helper
+libcanberra-gtk-module
 libdvdcss2
+marhaba
 modem-manager-gui
 monajat-applet
 most
@@ -55,6 +58,7 @@ os-prober
 python-distutils-extra
 samba
 supertux
+system-config-printer
 task-arabic
 task-arabic-desktop
 tesseract-ocr-ara
