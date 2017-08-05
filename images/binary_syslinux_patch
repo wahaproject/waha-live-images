@@ -9,75 +9,54 @@
 > 	# Get list of cfg.in tamplate files
 > 	_CFG_FILES=$(basename -a $(ls ${_TARGET}/*.cfg.in))
 > 
-187,190c193,196
-< 			# If multiple initrd images are being generated (by DKMS packages, etc),
-< 			# we likely only want the latest version.
-< 			ln $(ls -r1 --sort=version binary/${_INITRAMFS}/vmlinuz-* | head -n 1) binary/${_INITRAMFS}/vmlinuz
-< 			ln $(ls -r1 --sort=version binary/${_INITRAMFS}/initrd.img-* | head -n 1) binary/${_INITRAMFS}/initrd.img
----
-> 		# If multiple initrd images are being generated (by DKMS packages, etc),
-> 		# we likely only want the latest version.
-> 		mv $(ls -r1 --sort=version binary/${_INITRAMFS}/vmlinuz-* | head -n 1) binary/${_INITRAMFS}/vmlinuz
-> 		mv $(ls -r1 --sort=version binary/${_INITRAMFS}/initrd.img-* | head -n 1) binary/${_INITRAMFS}/initrd.img
-191a198,199
-> 		for _CFG_FILE in ${_CFG_FILES}
-> 		do
-193,198c201,207
+192,195c198,203
+< 			sed -e "s|@FLAVOUR@|${LB_LINUX_FLAVOURS}|g" \
 < 			    -e "s|@LINUX@|/${_INITRAMFS}/vmlinuz|g" \
 < 			    -e "s|@INITRD@|/${_INITRAMFS}/initrd.img|g" \
 < 			"${_TARGET}/live.cfg.in" >> "${_TARGET}/live.cfg"
-< 
+---
+> 			for _CFG_FILE in ${_CFG_FILES}
+> 			do
+> 				sed -e "s|@FLAVOUR@|${LB_LINUX_FLAVOURS}|g" \
+> 				-e "s|@LINUX@|/${_INITRAMFS}/vmlinuz|g" \
+> 				-e "s|@INITRD@|/${_INITRAMFS}/initrd.img|g" \
+> 				"${_TARGET}/${_CFG_FILE}" >> "${_TARGET}/$(basename ${_CFG_FILE} .in)"
+197,198c205,207
 < 			rm -f "${_TARGET}/live.cfg.in"
 < 			;;
 ---
-> 			-e "s|@LINUX@|/${_INITRAMFS}/vmlinuz|g" \
-> 			-e "s|@INITRD@|/${_INITRAMFS}/initrd.img|g" \
-> 			"${_TARGET}/${_CFG_FILE}" >> "${_TARGET}/$(basename ${_CFG_FILE} .in)"
-> 
-> 			rm -f "${_TARGET}/${_CFG_FILE}"
-> 		done
+> 				rm -f "${_TARGET}/${_CFG_FILE}"
+> 			done
 > 		;;
-201c210
-< 			_NUMBER="0"
----
-> 		_NUMBER="0"
-203,205c212,214
-< 			for _FLAVOUR in ${LB_LINUX_FLAVOURS}
-< 			do
-< 				_NUMBER="$((${_NUMBER} + 1))"
----
-> 		for _FLAVOUR in ${LB_LINUX_FLAVOURS}
-> 		do
-> 			_NUMBER="$((${_NUMBER} + 1))"
-207,208c216,217
-< 				ln binary/${_INITRAMFS}/vmlinuz-*-${_FLAVOUR} binary/${_INITRAMFS}/vmlinuz${_NUMBER}
-< 				ln binary/${_INITRAMFS}/initrd.img-*-${_FLAVOUR} binary/${_INITRAMFS}/initrd${_NUMBER}.img
----
-> 			ln binary/${_INITRAMFS}/vmlinuz-*-${_FLAVOUR} binary/${_INITRAMFS}/vmlinuz${_NUMBER}
-> 			ln binary/${_INITRAMFS}/initrd.img-*-${_FLAVOUR} binary/${_INITRAMFS}/initrd${_NUMBER}.img
-209a219,220
-> 			for _CFG_FILE in ${_CFG_FILES}
-> 			do
-212,213c223,224
+210,221c219,233
+< 				if [ "${_NUMBER}" -gt 1 ]
+< 				then
 < 					echo "" >> "${_TARGET}/live.cfg"
 < 					grep -v 'menu default' "${_TARGET}/live.cfg.in" >> "${_TARGET}/live.cfg"
----
-> 					echo "" >> "${_TARGET}/$(basename ${_CFG_FILE} .in)"
-> 					grep -v 'menu default' "${_TARGET}/${_CFG_FILE}" >> "${_TARGET}/$(basename ${_CFG_FILE} .in)"
-215c226
+< 				else
 < 					cat "${_TARGET}/live.cfg.in" >> "${_TARGET}/live.cfg"
----
-> 					cat "${_TARGET}/${_CFG_FILE}" >> "${_TARGET}/$(basename ${_CFG_FILE} .in)"
-219,221c230,232
+< 				fi
+< 
+< 				sed -i -e "s|@FLAVOUR@|${_FLAVOUR}|g" \
 < 				       -e "s|@LINUX@|/${_INITRAMFS}/vmlinuz${_NUMBER}|g" \
 < 				       -e "s|@INITRD@|/${_INITRAMFS}/initrd${_NUMBER}.img|g" \
 < 				"${_TARGET}/live.cfg"
 ---
-> 				-e "s|@LINUX@|/${_INITRAMFS}/vmlinuz${_NUMBER}|g" \
-> 				-e "s|@INITRD@|/${_INITRAMFS}/initrd${_NUMBER}.img|g" \
-> 				"${_TARGET}/$(basename ${_CFG_FILE} .in)"
-222a234
-> 		done
+> 				for _CFG_FILE in ${_CFG_FILES}
+> 				do
+> 					if [ "${_NUMBER}" -gt 1 ]
+> 					then
+> 					echo "" >> "${_TARGET}/$(basename ${_CFG_FILE} .in)"
+> 					grep -v 'menu default' "${_TARGET}/${_CFG_FILE}" >> "${_TARGET}/$(basename ${_CFG_FILE} .in)"
+> 					else
+> 					cat "${_TARGET}/${_CFG_FILE}" >> "${_TARGET}/$(basename ${_CFG_FILE} .in)"
+> 					fi
+> 
+> 					sed -i -e "s|@FLAVOUR@|${_FLAVOUR}|g" \
+> 					-e "s|@LINUX@|/${_INITRAMFS}/vmlinuz${_NUMBER}|g" \
+> 					-e "s|@INITRD@|/${_INITRAMFS}/initrd${_NUMBER}.img|g" \
+> 					"${_TARGET}/$(basename ${_CFG_FILE} .in)"
+> 				done
 224,225c236,237
 < 			rm -f "${_TARGET}/live.cfg.in"
 < 			;;
