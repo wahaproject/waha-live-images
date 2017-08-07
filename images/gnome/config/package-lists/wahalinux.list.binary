@@ -1,0 +1,12 @@
+# Add grub-efi packages to installer
+
+#if ARCHITECTURES i386
+grub-efi-ia32
+#endif
+
+#if ARCHITECTURES amd64
+grub-efi-amd64
+#endif
+
+# Speed up installation
+eatmydata
