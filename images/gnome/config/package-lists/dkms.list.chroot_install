@@ -5,6 +5,6 @@ pciutils
 broadcom-sta-dkms
 
 ## virtualbox
-# virtualbox-guest-dkms
-# virtualbox-guest-utils
-# virtualbox-guest-x11
+virtualbox-guest-dkms
+virtualbox-guest-utils
+virtualbox-guest-x11

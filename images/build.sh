@@ -11,7 +11,7 @@ EXEC_PATCH() { patch --backup-if-mismatch --forward /usr/lib/live/build/binary_s
 EXEC_PATCH || true
 
 _FLAVOURS="gnome"
-_NAME="wahalinux-9.0"
+_NAME="wahalinux-9.2"
 _SETS="unofficial"
 _SUFFIX=""
 _ARCHITECTURE="$(dpkg --print-architecture)"
